@@ -38,7 +38,10 @@ export default function App() {
               Selecione o tipo de cálculo:
             </h2>
             {calcType === null ? (
-              <div className="animate-fade-in flex flex-wrap justify-center gap-4">
+              <div
+                key="buttons"
+                className="animate-fade-in flex flex-wrap justify-center gap-4"
+              >
                 <button
                   onClick={() => handleSelectCalcType('threeNotes')}
                   className="cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
