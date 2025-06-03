@@ -1,7 +1,31 @@
 @import "tailwindcss";
 
+@theme {
+  --font-inter: var(--inter);
+  --font-nunito: var(--nunito);
+
+  --animate-fade-in: fadeIn 1s ease-in-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
 @layer base {
   body {
-    @apply antialiased;
+    @apply antialiased bg-no-repeat bg-cover bg-center bg-fixed;
+    background-image: url('./assets/bg-unileao.svg');
+  } 
+}
+
+@layer base {
+  :root {
+    --inter: 'Inter', sans-serif;
+    --nunito: 'Nunito', sans-serif;
   }
 }
