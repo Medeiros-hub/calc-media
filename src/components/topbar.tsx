@@ -49,12 +49,12 @@ export default function TopBar() {
         </div>
 
         <div className="flex gap-4 p-1 text-xs text-nowrap max-[900px]:hidden">
-          <a href="https://portal.unileao.edu.br">Portal Educacional</a>
-          <a href="https://matriculas.unileao.edu.br">
+          <a href="https://portal.unileao.edu.br" target='_blank'>Portal Educacional</a>
+          <a href="https://matriculas.unileao.edu.br" target='_blank'>
             Portal de Matrícula e Rematrícula
           </a>
-          <a href="https://digital.unileao.edu.br">Unileão Digital</a>
-          <a href="https://dliportal.zbra.com.br/Login.aspx?key=leaosampaio">
+          <a href="https://digital.unileao.edu.br" target='_blank'>Unileão Digital</a>
+          <a href="https://dliportal.zbra.com.br/Login.aspx?key=leaosampaio" target='_blank'>
             Biblioteca Virtual
           </a>
         </div>

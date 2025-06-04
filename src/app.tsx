@@ -45,20 +45,20 @@ export default function App() {
                 >
                   <button
                     onClick={() => handleSelectCalcType('threeNotes')}
-                    className="cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                    className="cursor-pointer w-xs rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
                   >
-                    Média de 3 notas - Medicina
+                    Média de 3 Notas - Medicina
                   </button>
                   <button
                     onClick={() => handleSelectCalcType('other')}
-                    className="cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                    className="w-xs cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
                   >
-                    Demais Cursos
+                    Média Demais Cursos
                   </button>
                 </div>
               </>
             ) : (
-              <div className="animate-fade-in scale-100 transition duration-500">
+              <div className="animate-fade-in scale-100 transition duration-500 flex flex-col md:items-baseline items-center">
                 {calcType === 'threeNotes' && <AverageThreeNotes />}
 
                 <button

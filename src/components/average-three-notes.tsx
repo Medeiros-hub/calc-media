@@ -31,7 +31,7 @@ export default function AverageThreeNotes() {
   }
 
   return (
-    <div>
+    <div className='flex justify-center flex-col'>
       <h2 className="font-inter mb-4 text-center text-xl font-semibold">
         Cálculo de 3 médias:
       </h2>
@@ -40,12 +40,14 @@ export default function AverageThreeNotes() {
           e.preventDefault()
           handleCalculate()
         }}
+        className='flex flex-col items-center justify-center space-y-4'
       >
-        <div className="block space-y-4 space-x-4 md:flex">
+        <div className="space-y-4 space-x-4 flex flex-wrap justify-center">
           {['AV1', 'AV2', 'AV3'].map((label, i) => (
             <div key={i} className="flex flex-col text-center">
-              <h3>Nota da {label}</h3>
+              <label htmlFor={`grade-${i}`}>Nota da {label}</label>
               <NumberInput
+                id={`grade-${i}`}
                 onChange={(e) => handleSetGrade(i, e.target.value)}
               />
             </div>
@@ -54,7 +56,7 @@ export default function AverageThreeNotes() {
 
         <button
           type="submit"
-          className="my-4 cursor-pointer rounded-lg bg-gray-800 px-6 py-3 font-semibold text-white backdrop-blur transition hover:bg-blue-700/80"
+          className="my-4 cursor-pointer rounded-lg bg-red-500 px-6 py-3 font-semibold text-white backdrop-blur transition hover:bg-red-700/80"
         >
           Calcular
         </button>
