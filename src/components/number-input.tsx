@@ -1,14 +1,17 @@
-interface NumberInputProps {
-  onChange: (value: string) => void
-}
-
-export default function NumberInput({ onChange }: NumberInputProps) {
+export default function NumberInput(
+  props: React.InputHTMLAttributes<HTMLInputElement>,
+) {
   return (
     <input
       type="number"
-      className="w-full rounded-lg border border-gray-300 bg-white p-2 text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+      step="0.1"
+      min="0"
+      max="10"
+      inputMode="decimal"
+      className="w-full min-w-[300px] rounded-lg bg-white/10 px-4 py-3 text-white placeholder-white/60 backdrop-blur transition valid:bg-white/30 focus:border-white/30 focus:ring-2 focus:ring-white/40 focus:outline-none"
       placeholder="0 a 10"
-      onChange={(e) => onChange(e.target.value)}
+      required
+      {...props}
     />
   )
 }

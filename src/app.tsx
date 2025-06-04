@@ -34,27 +34,29 @@ export default function App() {
 
         <main>
           <section className="text-white transition-all duration-300 ease-in-out">
-            <h2 className="font-inter mb-4 text-center text-xl font-semibold">
-              Selecione o tipo de cálculo:
-            </h2>
             {calcType === null ? (
-              <div
-                key="buttons"
-                className="animate-fade-in flex flex-wrap justify-center gap-4"
-              >
-                <button
-                  onClick={() => handleSelectCalcType('threeNotes')}
-                  className="cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+              <>
+                <h2 className="font-inter mb-4 text-center text-xl font-semibold">
+                  Selecione o tipo de cálculo:
+                </h2>
+                <div
+                  key="buttons"
+                  className="animate-fade-in flex flex-wrap justify-center gap-4"
                 >
-                  Média de 3 notas - Medicina
-                </button>
-                <button
-                  onClick={() => handleSelectCalcType('other')}
-                  className="cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
-                >
-                  Demais Cursos
-                </button>
-              </div>
+                  <button
+                    onClick={() => handleSelectCalcType('threeNotes')}
+                    className="cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                  >
+                    Média de 3 notas - Medicina
+                  </button>
+                  <button
+                    onClick={() => handleSelectCalcType('other')}
+                    className="cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                  >
+                    Demais Cursos
+                  </button>
+                </div>
+              </>
             ) : (
               <div className="animate-fade-in scale-100 transition duration-500">
                 {calcType === 'threeNotes' && <AverageThreeNotes />}
