@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import AverageThreeNotes from './components/average-three-notes'
 import TopBar from './components/topbar'
+import AverageOtherCourses from './components/average-other-courses'
 
 const CalculationType = {
   THREENOTES: 'threeNotes',
@@ -60,6 +61,7 @@ export default function App() {
             ) : (
               <div className="animate-fade-in scale-100 transition duration-500 flex flex-col md:items-baseline items-center">
                 {calcType === 'threeNotes' && <AverageThreeNotes />}
+                {calcType === 'other' && <AverageOtherCourses />}
 
                 <button
                   onClick={() => setCalcType(null)}
