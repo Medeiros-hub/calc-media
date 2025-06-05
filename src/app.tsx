@@ -61,9 +61,9 @@ export default function App() {
               <div className="animate-fade-in flex scale-100 flex-col items-center transition duration-500 md:items-baseline">
                 <button
                   onClick={() => setCalcType(null)}
-                  className="cursor-pointer self-start rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                  className="cursor-pointer self-start rounded-lg bg-white/10 px-4 py-2 font-semibold text-white backdrop-blur transition hover:bg-white/20 md:px-6 md:py-4"
                 >
-                  <FaArrowLeft size={20} />
+                  <FaArrowLeft size={16} />
                 </button>
                 {calcType === 'threeNotes' && <AverageThreeNotes />}
                 {calcType === 'other' && <AverageOtherCourses />}
