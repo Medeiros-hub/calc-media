@@ -7,7 +7,7 @@ import NumberInput from './number-input'
 
 export default function AverageOtherCourses() {
   const [average, setAverage] = useState<number | null>(null)
-  const [finalAverage, setFinalAverage] = useState<number | null>(null)
+  const [finalAverage, setFinalAverage] = useState<number>()
 
   const {
     handleSubmit,
@@ -20,9 +20,6 @@ export default function AverageOtherCourses() {
   }>({})
 
   const handleCalculate = () => {
-    setAverage(null)
-    setFinalAverage(null)
-
     const { ['grade-0']: av1, ['grade-1']: av2 } = getValues()
 
     const gradesToCurrency = [av1, av2].map((value) =>
@@ -36,11 +33,12 @@ export default function AverageOtherCourses() {
 
     // calculate final average
     const avf = 5 * 2 - currency(truncatedAvg).value
-    if (average === null) return
     const truncatedResult = Math.floor(avf * 100) / 100
 
     setFinalAverage(currency(truncatedResult).value)
   }
+
+  console.log(finalAverage)
 
   return (
     <div className="flex flex-col justify-center">

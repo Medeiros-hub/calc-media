@@ -7,7 +7,7 @@ import NumberInput from './number-input'
 
 export default function AverageThreeNotes() {
   const [average, setAverage] = useState<number | null>(null)
-  const [finalAverage, setFinalAverage] = useState<number | null>(null)
+  const [finalAverage, setFinalAverage] = useState<number>()
 
   const {
     handleSubmit,
@@ -22,9 +22,6 @@ export default function AverageThreeNotes() {
   }>({})
 
   const handleCalculate = () => {
-    setAverage(null)
-    setFinalAverage(null)
-
     const { ['grade-0']: av1, ['grade-1']: av2, ['grade-2']: av3 } = getValues()
 
     const gradesToCurrency = [av1, av2, av3].map((value) =>
@@ -41,7 +38,6 @@ export default function AverageThreeNotes() {
 
     // calculate final average
     const avf = 5 * 2 - currency(avg).value
-    if (average === null) return
     const truncatedResult = Math.floor(avf * 100) / 100
 
     setFinalAverage(currency(truncatedResult).value)
