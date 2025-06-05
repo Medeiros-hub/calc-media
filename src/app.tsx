@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { FaArrowLeft } from 'react-icons/fa6'
 
+import logoUnileao from './assets/logo-unileao.svg'
+import AverageOtherCourses from './components/average-other-courses'
 import AverageThreeNotes from './components/average-three-notes'
 import TopBar from './components/topbar'
-import AverageOtherCourses from './components/average-other-courses'
 
 const CalculationType = {
   THREENOTES: 'threeNotes',
@@ -22,18 +24,15 @@ export default function App() {
     <div className="flex min-h-dvh w-full flex-col">
       <TopBar />
 
-      <section className="flex flex-1 flex-col items-center justify-center space-y-16">
+      <section className="my-8 flex flex-1 flex-col items-center justify-center space-y-16">
         <div className="flex flex-col items-center justify-center gap-2">
-          <img
-            src="https://unileao.edu.br/wp-content/themes/portalv2.0/img/logo.svg"
-            className="w-[250px] md:w-[400px]"
-          />
+          <img src={logoUnileao} className="w-[250px] md:w-[400px]" />
           <h1 className="font-nunito text-xl font-extralight text-white">
             Calculadora de Notas Unileão
           </h1>
         </div>
 
-        <main>
+        <main className="rounded bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur">
           <section className="text-white transition-all duration-300 ease-in-out">
             {calcType === null ? (
               <>
@@ -46,7 +45,7 @@ export default function App() {
                 >
                   <button
                     onClick={() => handleSelectCalcType('threeNotes')}
-                    className="cursor-pointer w-xs rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                    className="w-xs cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
                   >
                     Média de 3 Notas - Medicina
                   </button>
@@ -59,16 +58,15 @@ export default function App() {
                 </div>
               </>
             ) : (
-              <div className="animate-fade-in scale-100 transition duration-500 flex flex-col md:items-baseline items-center">
-                {calcType === 'threeNotes' && <AverageThreeNotes />}
-                {calcType === 'other' && <AverageOtherCourses />}
-
+              <div className="animate-fade-in flex scale-100 flex-col items-center transition duration-500 md:items-baseline">
                 <button
                   onClick={() => setCalcType(null)}
-                  className="cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                  className="cursor-pointer self-start rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
                 >
-                  Voltar
+                  <FaArrowLeft size={20} />
                 </button>
+                {calcType === 'threeNotes' && <AverageThreeNotes />}
+                {calcType === 'other' && <AverageOtherCourses />}
               </div>
             )}
           </section>

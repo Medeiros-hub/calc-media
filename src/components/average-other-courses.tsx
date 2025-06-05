@@ -1,107 +1,95 @@
-import { useState } from 'react'
 import currency from 'currency.js'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
+import AverageStatus from './average-status'
 import NumberInput from './number-input'
 
 export default function AverageOtherCourses() {
-  const [grades, setGrades] = useState<string[]>(['', '', ''])
   const [average, setAverage] = useState<number | null>(null)
+  const [finalAverage, setFinalAverage] = useState<number | null>(null)
 
-  const handleSetGrade = (index: number, value: string) => {
-    const newGrades = [...grades]
-    newGrades[index] = value
-    setGrades(newGrades)
-  }
+  const {
+    handleSubmit,
+    register,
+    getValues,
+    formState: { errors },
+  } = useForm<{
+    'grade-0': string
+    'grade-1': string
+  }>({})
 
   const handleCalculate = () => {
-    // const gradesToFloat = grades.map((value) => parseFloat(value))
+    setAverage(null)
+    setFinalAverage(null)
 
-    // const isInvalid = gradesToFloat.some(
-    //   (value) => isNaN(value) || value < 0 || value > 10,
-    // )
+    const { ['grade-0']: av1, ['grade-1']: av2 } = getValues()
 
-    // if (isInvalid) {
-    //   setAverage(null)
-    //   return
-    // }
+    const gradesToCurrency = [av1, av2].map((value) =>
+      currency(parseFloat(value)),
+    )
 
-    // const avg = gradesToFloat.reduce((total, nextItem) => total + nextItem, 0) / 3
-    // const roundedAvg = parseFloat(avg.toFixed(2))
+    const avg = (gradesToCurrency[0].value + gradesToCurrency[1].value * 2) / 3
+    const truncatedAvg = Math.floor(avg * 100) / 100
 
-    // setAverage(roundedAvg)
+    setAverage(currency(truncatedAvg).value)
 
-    const gradesToCurrency = grades.map((value) => currency(parseFloat(value)))
-    const avg =
-      gradesToCurrency.reduce(
-        (total, nextItem) => total.add(nextItem),
-        currency(0),
-      ).value / 3
+    // calculate final average
+    const avf = 5 * 2 - currency(truncatedAvg).value
+    if (average === null) return
+    const truncatedResult = Math.floor(avf * 100) / 100
 
-    setAverage(avg)
+    setFinalAverage(currency(truncatedResult).value)
   }
 
   return (
     <div className="flex flex-col justify-center">
       <h2 className="font-inter mb-4 text-center text-xl font-semibold">
-        Cálculo de 3 médias:
+        Cálculo da Média:
       </h2>
       <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          handleCalculate()
-        }}
+        onSubmit={handleSubmit(handleCalculate)}
         className="flex flex-col items-center justify-center space-y-4"
       >
-        <div className="flex flex-wrap justify-center space-y-4 space-x-4">
+        <div className="m-4 flex flex-wrap justify-center">
           {['AV1', 'AV2'].map((label, i) => (
-            <div key={i} className="flex flex-col text-center">
+            <div key={i} className="flex flex-col p-4 text-center">
               <label htmlFor={`grade-${i}`}>Nota da {label}</label>
               <NumberInput
                 id={`grade-${i}`}
-                onChange={(e) => handleSetGrade(i, e.target.value)}
+                {...register(`grade-${i}` as 'grade-0' | 'grade-1', {
+                  required: 'Campo obrigatório',
+                  min: {
+                    value: 0,
+                    message: 'A nota deve ser maior ou igual a 0',
+                  },
+                  max: {
+                    value: 10,
+                    message: 'A nota deve ser menor ou igual a 10',
+                  },
+                })}
               />
+              {errors[`grade-${i}` as 'grade-0' | 'grade-1'] && (
+                <span className="text-red-400">
+                  {errors[`grade-${i}` as 'grade-0' | 'grade-1']?.message}
+                </span>
+              )}
             </div>
           ))}
         </div>
 
         <button
           type="submit"
-          className="my-4 cursor-pointer rounded-lg bg-red-500 px-6 py-3 font-semibold text-white backdrop-blur transition hover:bg-red-700/80"
+          className="group relative z-10 h-12 w-32 cursor-pointer overflow-hidden rounded bg-[#3892e6] text-xl text-white duration-1000 select-none hover:text-white"
         >
+          <span className="absolute -top-10 -left-2 -z-10 h-36 w-36 origin-center scale-0 transform rounded-full bg-[#0627D9] transition-all duration-700 group-hover:scale-100 group-hover:duration-500"></span>
+          <span className="absolute -top-10 -left-2 -z-10 h-36 w-36 origin-center scale-0 transform rounded-full bg-[#0340EF] transition-all duration-500 group-hover:scale-100 group-hover:duration-700"></span>
           Calcular
         </button>
       </form>
 
-      <div className="flex flex-col items-center justify-center">
-        {average !== null && average < 4 && (
-          <div className="mt-4 w-full max-w-md rounded-lg border border-red-500 bg-red-100 p-4 text-center text-red-500 shadow-lg backdrop-blur">
-            <strong className="block text-xl">Reprovado ❌</strong>
-            <p className="mt-2">
-              Sua média é <span className="font-bold">{average}</span>. Você foi
-              reprovado. Não faz AVF.
-            </p>
-          </div>
-        )}
-
-        {average !== null && average >= 7 && (
-          <div className="mt-4 w-full max-w-md rounded-lg border border-green-500 bg-green-100 p-4 text-center text-green-500 shadow-lg backdrop-blur">
-            <strong className="block text-xl">Aprovado ✅</strong>
-            <p className="mt-2">
-              Sua média é <span className="font-bold">{average}</span>. Você foi
-              aprovado. Não faz AVF.
-            </p>
-          </div>
-        )}
-
-        {average !== null && average >= 4 && average < 7 && (
-          <div className="mt-4 w-full max-w-md rounded-lg border border-yellow-500 bg-yellow-100 p-4 text-center text-yellow-600 shadow-lg backdrop-blur">
-            <strong className="block text-xl">Recuperação ⚠️</strong>
-            <p className="mt-2">
-              Sua média é <span className="font-bold">{average}</span>. Você
-              está de recuperação. Precisa fazer AVF.
-            </p>
-          </div>
-        )}
+      <div className="mx-8 flex flex-col items-center justify-center">
+        <AverageStatus average={average} finalAverage={finalAverage} />
       </div>
     </div>
   )

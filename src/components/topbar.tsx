@@ -7,7 +7,7 @@ import {
 
 export default function TopBar() {
   return (
-    <nav className="flex w-full bg-white text-[#626262]">
+    <nav className="flex w-auto bg-white text-[#626262]">
       <div className="flex w-full justify-around py-2">
         <div className="flex items-center p-1">
           <a
@@ -49,12 +49,19 @@ export default function TopBar() {
         </div>
 
         <div className="flex gap-4 p-1 text-xs text-nowrap max-[900px]:hidden">
-          <a href="https://portal.unileao.edu.br" target='_blank'>Portal Educacional</a>
-          <a href="https://matriculas.unileao.edu.br" target='_blank'>
+          <a href="https://portal.unileao.edu.br" target="_blank">
+            Portal Educacional
+          </a>
+          <a href="https://matriculas.unileao.edu.br" target="_blank">
             Portal de Matrícula e Rematrícula
           </a>
-          <a href="https://digital.unileao.edu.br" target='_blank'>Unileão Digital</a>
-          <a href="https://dliportal.zbra.com.br/Login.aspx?key=leaosampaio" target='_blank'>
+          <a href="https://digital.unileao.edu.br" target="_blank">
+            Unileão Digital
+          </a>
+          <a
+            href="https://dliportal.zbra.com.br/Login.aspx?key=leaosampaio"
+            target="_blank"
+          >
             Biblioteca Virtual
           </a>
         </div>
