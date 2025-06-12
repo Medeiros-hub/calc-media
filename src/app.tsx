@@ -6,18 +6,25 @@ import AverageOtherCourses from './components/average-other-courses'
 import AverageThreeNotes from './components/average-three-notes'
 import TopBar from './components/topbar'
 
-const CalculationType = {
-  THREENOTES: 'threeNotes',
+export const CalculationTypes = {
+  MEDICINE: 'medicine',
   OTHER: 'other',
 } as const
 
-type CalculationType = (typeof CalculationType)[keyof typeof CalculationType]
+export type CalculationType =
+  (typeof CalculationTypes)[keyof typeof CalculationTypes]
 
 export default function App() {
-  const [calcType, setCalcType] = useState<CalculationType | null>(null)
+  const [calcHistory, setCalcHistory] = useState<CalculationType[]>([])
+
+  const currentCalcType = calcHistory[calcHistory?.length - 1] ?? null
 
   const handleSelectCalcType = (type: CalculationType) => {
-    setCalcType(type)
+    setCalcHistory((prev) => [...prev, type])
+  }
+
+  const handleGoBack = () => {
+    setCalcHistory((prev) => prev.slice(0, -1))
   }
 
   return (
@@ -34,39 +41,40 @@ export default function App() {
 
         <main className="rounded bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur">
           <section className="text-white transition-all duration-300 ease-in-out">
-            {calcType === null ? (
+            {currentCalcType === null ? (
               <>
                 <h2 className="font-inter mb-4 text-center text-xl font-semibold">
-                  Selecione o tipo de cálculo:
+                  Selecione o curso para calcular:
                 </h2>
                 <div
                   key="buttons"
                   className="animate-fade-in flex flex-wrap justify-center gap-4"
                 >
                   <button
-                    onClick={() => handleSelectCalcType('threeNotes')}
+                    onClick={() => handleSelectCalcType('medicine')}
                     className="w-xs cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
                   >
-                    Média de 3 Notas - Medicina
+                    Média - Medicina
                   </button>
                   <button
                     onClick={() => handleSelectCalcType('other')}
                     className="w-xs cursor-pointer rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
                   >
-                    Média Demais Cursos
+                    Média - Demais Cursos
                   </button>
                 </div>
               </>
             ) : (
               <div className="animate-fade-in flex scale-100 flex-col items-center transition duration-500 md:items-baseline">
                 <button
-                  onClick={() => setCalcType(null)}
-                  className="cursor-pointer self-start rounded-lg bg-white/10 px-6 py-4 font-semibold text-white backdrop-blur transition hover:bg-white/20"
+                  onClick={handleGoBack}
+                  className="cursor-pointer self-start rounded-lg bg-white/10 px-4 py-2 font-semibold text-white backdrop-blur transition hover:bg-white/20 md:px-6 md:py-4"
                 >
-                  <FaArrowLeft size={20} />
+                  <FaArrowLeft size={16} />
                 </button>
-                {calcType === 'threeNotes' && <AverageThreeNotes />}
-                {calcType === 'other' && <AverageOtherCourses />}
+                {currentCalcType === 'medicine' && <AverageThreeNotes />}
+
+                {currentCalcType === 'other' && <AverageOtherCourses />}
               </div>
             )}
           </section>
