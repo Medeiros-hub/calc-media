@@ -48,18 +48,26 @@ export default function AverageThreeNotes() {
   }
 
   return (
-    <div className="flex flex-col justify-center">
-      <h2 className="font-inter mb-4 text-center text-xl font-semibold">
-        Cálculo de 3 médias:
-      </h2>
+    <div className="shadow-card-input flex max-w-[550px] flex-col rounded-lg bg-linear-210 from-[#024269] to-[#00000033] py-8">
+      <div className="text-center">
+        <h2 className="text-[40px] font-extrabold">Medicina</h2>
+        <p className="text-lg text-white/70 lg:text-2xl">
+          Preencha suas notas para saber sua média
+        </p>
+      </div>
       <form
         onSubmit={handleSubmit(handleCalculate)}
         className="flex flex-col items-center justify-center space-y-4"
       >
         <div className="m-4 flex flex-wrap justify-center">
-          {['AV1', 'AV2', 'AV3'].map((label, i) => (
-            <div key={i} className="flex flex-col p-4 text-center">
-              <label htmlFor={`grade-${i}`}>Nota da {label}</label>
+          {['N1', 'N2', 'N3'].map((label, i) => (
+            <div key={i} className="flex flex-col p-4">
+              <label
+                htmlFor={`grade-${i}`}
+                className="font-nunito ml-4 text-xl lg:text-2xl"
+              >
+                Nota da {label}
+              </label>
               <NumberInput
                 id={`grade-${i}`}
                 {...register(`grade-${i}` as 'grade-0' | 'grade-1', {
@@ -85,10 +93,8 @@ export default function AverageThreeNotes() {
 
         <button
           type="submit"
-          className="group relative z-10 h-12 w-32 cursor-pointer overflow-hidden rounded bg-[#3892e6] text-xl text-white duration-1000 hover:text-white"
+          className="text-inter w-full max-w-xs cursor-pointer rounded-lg bg-white/30 px-6 py-2.5 text-xl text-white transition lg:text-4xl"
         >
-          <span className="absolute -top-10 -left-2 -z-10 h-36 w-36 origin-center scale-0 transform rounded-full bg-[#0627D9] transition-all duration-700 group-hover:scale-100 group-hover:duration-500"></span>
-          <span className="absolute -top-10 -left-2 -z-10 h-36 w-36 origin-center scale-0 transform rounded-full bg-[#0340EF] transition-all duration-500 group-hover:scale-100 group-hover:duration-700"></span>
           Calcular
         </button>
       </form>
