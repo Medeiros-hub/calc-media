@@ -4,6 +4,10 @@
   --font-inter: var(--inter);
   --font-nunito: var(--nunito);
 
+  --color-card: var(--bg-card);
+
+  --shadow-card-input: var(--card-input);
+
   --animate-fade-in: fadeIn 1s ease-in-out;
 
   @keyframes fadeIn {
@@ -17,9 +21,15 @@
 }
 
 @layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   body {
     @apply antialiased bg-no-repeat bg-cover bg-center bg-fixed;
-    background-image: url('./assets/bg-unileao.svg');
+    background-image: linear-gradient(90deg, #024269 1%, #0482CF 99%);
   } 
 }
 
@@ -27,5 +37,9 @@
   :root {
     --inter: 'Inter', sans-serif;
     --nunito: 'Nunito', sans-serif;
+
+    --bg-card: #023554;
+
+    --card-input: 0px 3px 6px 0px #00000040;
   }
 }
