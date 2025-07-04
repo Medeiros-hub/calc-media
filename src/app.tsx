@@ -24,58 +24,56 @@ export default function App() {
     <div className="font-inter flex min-h-dvh w-full flex-col">
       {/* <TopBar /> */}
 
-      <section className="flex flex-1 flex-col items-center justify-center space-y-11 md:space-y-[76px]">
-        <img
-          src={logoUnileao}
-          className="w-[250px] sm:w-[400px] md:w-[600px]"
-        />
+      <section className="flex flex-1 flex-col items-center justify-center gap-10">
+        <img src={logoUnileao} className="mt-2 w-[300px] md:w-[400px]" />
 
         <main>
           <section className="flex flex-col items-center justify-center text-white transition-all duration-300 ease-in-out">
             {calcType === null ? (
               <>
                 <div className="flex flex-col gap-y-[18px] text-center md:gap-y-3">
-                  <h1 className="text-[32px] font-extrabold md:text-5xl">
+                  <h1 className="text-[32px] font-extrabold md:text-4xl">
                     Selecione seu Curso
                   </h1>
-                  <p className="text-base font-medium lg:text-4xl">
+                  <p className="text-base font-medium lg:text-2xl">
                     Vamos calcular sua média de forma simples e rápida
                   </p>
                 </div>
 
                 <div
                   key="buttons"
-                  className="animate-fade-in mt-7 flex flex-col gap-[30px] lg:mt-[76px] lg:flex-row lg:gap-[52px]"
+                  className="animate-fade-in mt-7 flex flex-col gap-6 lg:mt-[76px] lg:flex-row lg:gap-0"
                 >
                   <button
                     onClick={() => handleSelectCalcType('threeNotes')}
-                    className="xs:w-auto mx-6 cursor-pointer rounded-lg shadow-[0px_3px_6px_0px_#00000040]"
+                    className="w-full cursor-pointer rounded-lg shadow-[0px_3px_6px_0px_#00000040] lg:mx-10"
                   >
-                    <div className="bg-card xs:py-24 flex h-full flex-col items-center rounded-t-lg px-14 py-14">
-                      <h2 className="text-[32px] font-extrabold lg:text-5xl">
+                    <div className="bg-card flex h-full flex-col items-center rounded-t-lg px-14 py-14">
+                      <h2 className="text-[32px] font-extrabold lg:text-4xl">
                         Medicina
                       </h2>
-                      <p className="text-base text-white/85 lg:text-[32px]">
+                      <p className="text-base text-white/85 lg:text-2xl">
                         Cálculo especial para o curso de Medicina
                       </p>
                     </div>
-                    <div className="rounded-b-lg bg-white text-xl text-[#060606]/70 lg:text-[32px]">
+                    <div className="rounded-b-lg bg-white text-xl text-[#060606]/70 lg:text-2xl">
                       Ir para calculo
                     </div>
                   </button>
+
                   <button
                     onClick={() => handleSelectCalcType('other')}
-                    className="xs:w-auto mx-6 cursor-pointer rounded-lg shadow-[0px_3px_6px_0px_#00000040]"
+                    className="w-full cursor-pointer rounded-lg shadow-[0px_3px_6px_0px_#00000040] lg:mx-10"
                   >
-                    <div className="bg-card xs:py-24 flex h-full flex-col items-center rounded-t-lg px-14 py-14">
-                      <h2 className="text-[32px] font-extrabold text-nowrap md:text-5xl">
+                    <div className="bg-card flex h-full flex-col items-center rounded-t-lg px-14 py-14">
+                      <h2 className="text-[32px] font-extrabold lg:text-4xl">
                         Demais Cursos
                       </h2>
-                      <p className="text-base text-white/85 md:text-[32px]">
+                      <p className="text-base text-white/85 lg:text-2xl">
                         Cálculo padrão para todos os outros cursos
                       </p>
                     </div>
-                    <div className="rounded-b-lg bg-white text-xl text-[#060606]/70 md:text-[32px]">
+                    <div className="rounded-b-lg bg-white text-xl text-[#060606]/70 lg:text-2xl">
                       Ir para calculo
                     </div>
                   </button>

@@ -33,21 +33,22 @@ export default function AverageThreeNotes() {
         (total, nextItem) => total.add(nextItem),
         currency(0),
       ).value / 3
+    const truncatedAvg = Math.floor(avg * 100) / 100
 
-    setAverage(currency(avg).value)
+    setAverage(currency(truncatedAvg).value)
 
     // calculate final average
-    const avf = 5 * 2 - currency(avg).value
+    const avf = Math.max(5, 10 - truncatedAvg)
     const truncatedResult = Math.floor(avf * 100) / 100
 
     setFinalAverage(currency(truncatedResult).value)
   }
 
   return (
-    <div className="shadow-card-input flex max-w-[550px] flex-col rounded-lg bg-linear-210 from-[#024269] to-[#00000033] py-8">
+    <div className="shadow-card-input flex max-w-[550px] flex-col rounded-lg bg-linear-210 from-[#024269] to-[#00000033] py-4">
       <div className="text-center">
-        <h2 className="text-[40px] font-extrabold">Medicina</h2>
-        <p className="text-lg text-white/70 lg:text-2xl">
+        <h2 className="text-4xl font-extrabold">Medicina</h2>
+        <p className="block text-xl font-normal">
           Preencha suas notas para saber sua média
         </p>
       </div>
@@ -55,9 +56,9 @@ export default function AverageThreeNotes() {
         onSubmit={handleSubmit(handleCalculate)}
         className="flex flex-col items-center justify-center space-y-4"
       >
-        <div className="m-4 flex flex-wrap justify-center">
+        <div className="m-4 flex w-full flex-wrap justify-center">
           {['N1', 'N2', 'N3'].map((label, i) => (
-            <div key={i} className="flex flex-col p-4">
+            <div key={i} className="flex w-full flex-col px-4 py-2">
               <label
                 htmlFor={`grade-${i}`}
                 className="font-nunito ml-4 text-xl lg:text-2xl"
@@ -87,12 +88,14 @@ export default function AverageThreeNotes() {
           ))}
         </div>
 
-        <button
-          type="submit"
-          className="text-inter w-full max-w-xs cursor-pointer rounded-lg bg-white/30 px-6 py-2.5 text-xl text-white transition lg:text-4xl"
-        >
-          Calcular
-        </button>
+        <div className="w-full px-4 py-2">
+          <button
+            type="submit"
+            className="text-inter w-full cursor-pointer rounded-lg bg-white/30 px-6 py-2.5 text-xl text-white transition lg:text-4xl"
+          >
+            Calcular
+          </button>
+        </div>
       </form>
 
       <div className="mx-8 flex flex-col items-center justify-center">

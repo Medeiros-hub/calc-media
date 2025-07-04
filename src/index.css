@@ -29,7 +29,7 @@
 
   body {
     @apply antialiased bg-no-repeat bg-cover bg-center bg-fixed;
-    background-image: linear-gradient(90deg, #024269, #0482CF);
+    background-image: linear-gradient(90deg, #024269 1%, #0482CF 99%);
   } 
 }
 
@@ -38,7 +38,7 @@
     --inter: 'Inter', sans-serif;
     --nunito: 'Nunito', sans-serif;
 
-    --bg-card: #024269;
+    --bg-card: #023554;
 
     --card-input: 0px 3px 6px 0px #00000040;
   }
