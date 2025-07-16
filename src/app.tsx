@@ -53,11 +53,11 @@ export default function App() {
                         Medicina
                       </h2>
                       <p className="text-base text-white/85 lg:text-2xl">
-                        Cálculo especial para o curso de Medicina
+                        Cálculo para o curso de Medicina
                       </p>
                     </div>
                     <div className="rounded-b-lg bg-white text-xl text-[#060606]/70 lg:text-2xl">
-                      Ir para calculo
+                      Ir para o cálculo
                     </div>
                   </button>
 
@@ -70,11 +70,11 @@ export default function App() {
                         Demais Cursos
                       </h2>
                       <p className="text-base text-white/85 lg:text-2xl">
-                        Cálculo padrão para todos os outros cursos
+                        Cálculo para os cursos com AV1 e AV2
                       </p>
                     </div>
                     <div className="rounded-b-lg bg-white text-xl text-[#060606]/70 lg:text-2xl">
-                      Ir para calculo
+                      Ir para o cálculo
                     </div>
                   </button>
                 </div>

@@ -5,7 +5,7 @@ export default function NumberInput(
     <input
       {...props}
       type="number"
-      step="0.1"
+      step="0.01"
       inputMode="decimal"
       placeholder="0 a 10"
       className="text-nunito w-full rounded-lg bg-white/30 px-6 py-2.5 text-right text-xl text-white transition valid:bg-white/30 focus:border-white/30 focus:ring-2 focus:ring-white/40 focus:outline-none lg:text-3xl"
