@@ -6,8 +6,8 @@ import AverageStatus from './average-status'
 import NumberInput from './number-input'
 
 export default function AverageThreeNotes() {
-  const [average, setAverage] = useState<number | null>(null)
-  const [finalAverage, setFinalAverage] = useState<number>()
+  const [average, setAverage] = useState<string>()
+  const [finalAverage, setFinalAverage] = useState<string>()
 
   const {
     handleSubmit,
@@ -18,7 +18,6 @@ export default function AverageThreeNotes() {
     'grade-0': string
     'grade-1': string
     'grade-2': string
-    avf?: string
   }>({})
 
   const handleCalculate = () => {
@@ -28,20 +27,18 @@ export default function AverageThreeNotes() {
       currency(parseFloat(value)),
     )
 
-    const avg =
-      gradesToCurrency.reduce(
-        (total, nextItem) => total.add(nextItem),
-        currency(0),
-      ).value / 3
-    const truncatedAvg = Math.floor(avg * 100) / 100
+    const avg = gradesToCurrency
+      .reduce((total, nextItem) => total.add(nextItem), currency(0))
+      .divide(3)
 
-    setAverage(currency(truncatedAvg).value)
+    const formattedAvg = avg.value.toFixed(2)
+    setAverage(formattedAvg)
 
     // calculate final average
-    const avf = Math.max(5, 10 - truncatedAvg)
-    const truncatedResult = Math.floor(avf * 100) / 100
+    const avf = currency(Math.max(5, 10 - Number(formattedAvg)))
+    const formattedAvf = avf.value.toFixed(2)
 
-    setFinalAverage(currency(truncatedResult).value)
+    setFinalAverage(formattedAvf)
   }
 
   return (
@@ -49,7 +46,7 @@ export default function AverageThreeNotes() {
       <div className="text-center">
         <h2 className="text-4xl font-extrabold">Medicina</h2>
         <p className="block text-xl font-normal">
-          Preencha suas notas para saber sua média
+          Preencha suas notas para calcular a sua média
         </p>
       </div>
       <form
@@ -57,7 +54,7 @@ export default function AverageThreeNotes() {
         className="flex flex-col items-center justify-center space-y-4"
       >
         <div className="m-4 flex w-full flex-wrap justify-center">
-          {['N1', 'N2', 'N3'].map((label, i) => (
+          {['AV1', 'AV2', 'AV3'].map((label, i) => (
             <div key={i} className="flex w-full flex-col px-4 py-2">
               <label
                 htmlFor={`grade-${i}`}
@@ -99,7 +96,7 @@ export default function AverageThreeNotes() {
       </form>
 
       <div className="mx-8 flex flex-col items-center justify-center">
-        <AverageStatus average={average} finalAverage={finalAverage} />
+        <AverageStatus average={average!} finalAverage={finalAverage} />
       </div>
     </div>
   )
